@@ -17,8 +17,8 @@ func handleRoot(writer http.ResponseWriter, request *http.Request) {
 	body, _ := io.ReadAll(request.Body)
 	shortURL := doShort(string(body))
 	writer.WriteHeader(201)
-	resultUrl := url.URL{Scheme: "http", Host: request.Host, Path: shortURL}
-	writer.Write([]byte(resultUrl.String()))
+	resultURL := url.URL{Scheme: "http", Host: request.Host, Path: shortURL}
+	writer.Write([]byte(resultURL.String()))
 }
 
 func handleID(writer http.ResponseWriter, request *http.Request) {
