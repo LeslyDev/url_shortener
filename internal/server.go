@@ -3,6 +3,7 @@ package internal
 import (
 	"io"
 	"net/http"
+	"net/url"
 	"strconv"
 )
 
@@ -16,7 +17,8 @@ func handleRoot(writer http.ResponseWriter, request *http.Request) {
 	body, _ := io.ReadAll(request.Body)
 	shortURL := doShort(string(body))
 	writer.WriteHeader(201)
-	writer.Write([]byte("http://" + request.Host + "/" + shortURL))
+	resultUrl := url.URL{Scheme: "http", Host: request.Host, Path: shortURL}
+	writer.Write([]byte(resultUrl.String()))
 }
 
 func handleID(writer http.ResponseWriter, request *http.Request) {
