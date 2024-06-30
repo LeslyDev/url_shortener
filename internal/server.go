@@ -16,7 +16,7 @@ func handleRoot(writer http.ResponseWriter, request *http.Request) {
 	body, _ := io.ReadAll(request.Body)
 	shortURL := doShort(string(body))
 	writer.WriteHeader(201)
-	writer.Write([]byte(shortURL))
+	writer.Write([]byte("http://" + request.Host + "/" + shortURL))
 }
 
 func handleID(writer http.ResponseWriter, request *http.Request) {
@@ -35,5 +35,5 @@ func RunServer() {
 	mux.HandleFunc("/", handleRoot)
 	mux.HandleFunc("/{id}", handleID)
 
-	http.ListenAndServe("localhost:8080", mux)
+	http.ListenAndServe(":8080", mux)
 }
