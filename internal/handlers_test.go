@@ -11,11 +11,11 @@ import (
 )
 
 func TestIDHandler(t *testing.T) {
-	storage := URLStorage{mapping: make(map[string]string, 0)}
+	storage := NewURLStorage()
 	key := "lol"
 	badKey := "mek"
 	value := "kek"
-	storage.mapping[key] = value
+	storage.Add(key, value)
 
 	type want struct {
 		statusCode  int
@@ -64,7 +64,7 @@ func TestIDHandler(t *testing.T) {
 }
 
 func TestRootHandler(t *testing.T) {
-	storage := URLStorage{mapping: make(map[string]string, 0)}
+	storage := NewURLStorage()
 
 	type want struct {
 		statusCode  int
