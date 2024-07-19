@@ -6,7 +6,7 @@ import (
 
 func RunServer() {
 	mux := http.NewServeMux()
-	storage := URLStorage{mapping: make(map[string]string, 0)}
+	storage := NewURLStorage()
 	mux.HandleFunc("/", RootHandler(storage))
 	mux.HandleFunc("/{id}", IDHandler(storage))
 
